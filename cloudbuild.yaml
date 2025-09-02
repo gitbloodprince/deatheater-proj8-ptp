@@ -1,16 +1,17 @@
 steps:
-  - name: 'ubuntu'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        apt-get update && apt-get install -y \
-        unixodbc \
-        unixodbc-dev \
-        libpq-dev \
-        odbcinst \
-        libodbc1
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/p8-deatheater-hybrid/app-image-repo/app-image', '.']
 
-  - name: 'python'
-    entrypoint: 'pip'
-    args: ['install', '-r', 'requirements.txt']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'northamerica-northeast2-docker.pkg.dev/p8-deatheater-hybrid/app-image-repo/app-image']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'run', 'deploy', 'deatheater-proj8-ptp',
+        '--image', 'northamerica-northeast2-docker.pkg.dev/p8-deatheater-hybrid/app-image-repo/app-image',
+        '--region', 'northamerica-northeast2',
+        '--platform', 'managed',
+        '--allow-unauthenticated'
+      ]

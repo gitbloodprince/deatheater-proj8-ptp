@@ -10,6 +10,5 @@ venv/
 .DS_Store
 # AWS deployment artifacts
 Dockerrun.aws.json
-Dockerfile
 Dockerrun.aws.zip
 *.zip
