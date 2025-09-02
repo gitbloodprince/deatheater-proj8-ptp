@@ -1,0 +1,16 @@
+steps:
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install -y \
+        unixodbc \
+        unixodbc-dev \
+        libpq-dev \
+        odbcinst \
+        libodbc1
+
+  - name: 'python'
+    entrypoint: 'pip'
+    args: ['install', '-r', 'requirements.txt']
