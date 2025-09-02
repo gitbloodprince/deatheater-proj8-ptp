@@ -1,18 +1,12 @@
 # Use official Python image
 FROM python:3.11-slim
 
-# Install curl and gnupg (needed for apt-key)
-RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg \
-    apt-transport-https
+# Set environment variables
+ENV ACCEPT_EULA=Y
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/opt/mssql-tools18/bin:$PATH"
 
-# Install Microsoft ODBC Driver 18 for SQL Server
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-    curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
-    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18
-
-# Install required packages
+# Install system dependencies and Microsoft GPG key
 RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
@@ -20,24 +14,20 @@ RUN apt-get update && apt-get install -y \
     unixodbc \
     unixodbc-dev \
     libpq-dev \
-    odbcinst
-
-# Add Microsoft GPG key and repository
-RUN mkdir -p /etc/apt/keyrings && \
-    curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/11/prod stable main" > /etc/apt/sources.list.d/mssql-release.list
-
-# Install ODBC driver
-RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18
-
+    odbcinst \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/11/prod stable main" > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update && apt-get install -y msodbcsql18 mssql-tools18 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
 
-# Copy code
+# Copy application code
 COPY . .
 
-# Upgrade pip and install Python dependencies
+# Install Python dependencies
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
