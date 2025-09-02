@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project 8 - Entries</title>
+</head>
+<body>
+    <h1>Submitted Entries</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>StudentID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in entries %}
+            <tr>
+                <td>{{ row[0] }}</td> <!-- StudentID -->
+                <td>{{ row[1] }}</td> <!-- Name -->
+                <td>{{ row[2] }}</td> <!-- Email -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Back to form</a>
+</body>
+</html>
