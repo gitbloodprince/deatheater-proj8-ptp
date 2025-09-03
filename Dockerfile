@@ -62,6 +62,7 @@ RUN apt-get update && \
     ACCEPT_EULA=Y apt-get install -y msodbcsql18 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+
 # Optional: Copy SQL tools from Stage 1
 COPY --from=sqltools /opt/mssql-tools18 /opt/mssql-tools18
 
