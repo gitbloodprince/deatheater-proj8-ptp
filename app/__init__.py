@@ -46,10 +46,12 @@
 
 #     return app
 
-from flask import Flask, g, jsonify
+from flask import Flask, g, jsonify, Response
 import os
 import pyodbc
+import urllib.request
 from .routes import bp
+
 
 def create_app():
     app = Flask(__name__)
@@ -105,6 +107,13 @@ def create_app():
     @app.route("/health")
     def health():
         return jsonify({"status": "ok"})
+    
+    @app.route("/myip")
+    def myip():
+        with urllib.request.urlopen("https://api.ipify.org") as r:
+             ip = r.read().decode("utf-8")
+        return Response(ip, mimetype="text/plain")
+
 
     return app
 
