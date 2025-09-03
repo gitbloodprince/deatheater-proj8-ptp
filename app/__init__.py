@@ -106,7 +106,7 @@ def create_app():
     # Optional: health check route
     @app.route("/health")
     def health():
-        return jsonify({"status": "ok"})
+        return jsonify({"status": "ok-fine"})
     
     # @app.route("/myip")
     # def myip():
