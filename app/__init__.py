@@ -108,11 +108,11 @@ def create_app():
     def health():
         return jsonify({"status": "ok-fine"})
     
-    # @app.route("/myip")
-    # def myip():
-    #     with urllib.request.urlopen("https://api.ipify.org") as r:
-    #          ip = r.read().decode("utf-8")
-    #     return Response(ip, mimetype="text/plain")
+    @app.route("/myip")
+    def myip():
+        with urllib.request.urlopen("https://api.ipify.org") as r:
+             ip = r.read().decode("utf-8")
+        return Response(ip, mimetype="text/plain")
 
 
     return app

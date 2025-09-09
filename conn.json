@@ -1,0 +1,36 @@
+{
+  "connectionMode": "Default",
+  "connectionProtocol": "IKEv2",
+  "connectionStatus": "NotConnected",
+  "connectionType": "IPsec",
+  "dpdTimeoutSeconds": 45,
+  "egressBytesTransferred": 0,
+  "enableBgp": true,
+  "enablePrivateLinkFastPath": false,
+  "etag": "W/\"2d2ec06e-a6e8-4749-a5f6-63e7dc882caf\"",
+  "expressRouteGatewayBypass": false,
+  "gatewayCustomBgpIpAddresses": [],
+  "id": "/subscriptions/ce181674-2911-4a50-87eb-159ff2af3318/resourceGroups/rg-project8-dev/providers/Microsoft.Network/connections/conn-to-gcp",
+  "ingressBytesTransferred": 0,
+  "ipsecPolicies": [],
+  "localNetworkGateway2": {
+    "id": "/subscriptions/ce181674-2911-4a50-87eb-159ff2af3318/resourceGroups/rg-project8-dev/providers/Microsoft.Network/localNetworkGateways/lng-to-gcp",
+    "resourceGroup": "rg-project8-dev"
+  },
+  "location": "canadacentral",
+  "name": "conn-to-gcp",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "rg-project8-dev",
+  "resourceGuid": "1fda1969-9583-48e7-9ff4-d94fd7d492e6",
+  "routingWeight": 0,
+  "tags": {},
+  "trafficSelectorPolicies": [],
+  "tunnelProperties": [],
+  "type": "Microsoft.Network/connections",
+  "useLocalAzureIpAddress": false,
+  "usePolicyBasedTrafficSelectors": false,
+  "virtualNetworkGateway1": {
+    "id": "/subscriptions/ce181674-2911-4a50-87eb-159ff2af3318/resourceGroups/rg-project8-dev/providers/Microsoft.Network/virtualNetworkGateways/az-vpn-gateway",
+    "resourceGroup": "rg-project8-dev"
+  }
+}
